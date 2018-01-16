@@ -1,0 +1,38 @@
+html(lang='en')
+	head
+		title Choorz - Home
+		script(src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous")
+		link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+		script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+		
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+	body
+		.site-wrapper
+			.site-wrapper-inner
+				include navbar
+				.container
+					#accordion(role='tablist')
+						each item in category
+							.card
+								// Create dynamic ID's for each 'category-and-description-combo'
+								div(id=`heading${item}`, class='card-header' role='tab')
+									h5.mb-0
+										//And here (href & aria-controls)
+										a.btn.btn-secondary#chorebtn(data-toggle='collapse', href=`#collapse${item}`, role='button', aria-expanded='false', aria-controls=`collapse${item}`)
+											| #{item}
+								//And here
+								div(id=`collapse${item}`, class='collapse' role='tabpanel', aria-labelledby=`heading${item}`, data-parent='#accordion')
+									.card-body
+										//Do I need list-group-flush?
+										ul.list-group.list-group-flush
+											each chore in result
+												if chore.dataValues.category === `${item}` 
+													li.list-group-item
+														a(role="button") #{chore.dataValues.description}
+			include footer
+
+style
+	include ../public/custom/general.css
+	include ../public/custom/index.css

@@ -1,0 +1,66 @@
+html(lang='en')
+	head
+		title Choorz - Sign up
+		script(src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous")
+		link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+		script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js")
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+	body
+		.site-wrapper
+			.site-wrapper-inner
+				include navbar
+				.container
+					form.form-signin#signupform(role="form" data-toggle="validator" data-disable="", method="POST" action="/signup")
+						h2.form-signin-heading Fill in all fields to create an account
+						p.lead or <a id="login" href="./login">log in</a> if you already have an account
+						.form-group.has-feedback#email
+							input#inputEmail.form-control(type='email', name="email" placeholder='Email@address.com', data-error="Bruh, that email address is invalid", required='', autofocus='')
+							#emailInUse
+							span.glyphicon.form-control-feedback
+						.form-group.has-feedback#username
+							input#inputUsername.form-control(type='text', name="username" placeholder='Username', required='', autofocus='')
+							small.form-text.text-muted
+							#usernameInUse
+						.form-group.has-feedback#password
+							input#inputPassword.form-control(type='password', name="password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$" placeholder='Password', required='')
+							| Your password must be at least 7 characters long and must contain (at least) one uppercase letter, a digit and a special character.
+							span.glyphicon.form-control-feedback
+						.form-group.has-feedback#verifypassword
+							input#inputVerifyPassword.form-control(type='password', name="verifyPw" data-match='#inputPassword', data-match-error="Whoops, these don't match", placeholder='Verify password', required='')
+							span.glyphicon.form-control-feedback
+						//- .checkbox
+						//- 	label
+						//- 		input(type='checkbox', value='remember-me')
+						//- 		|  Remember me
+						input.btn.btn-lg.btn-secondary#submitbtn(type='button' value='Sign up') 
+			include footer
+
+script.
+	$(document).ready(() => {
+		$('#submitbtn').click((e) => {
+			$('#emailInUse').empty()
+			$('#usernameInUse').empty()
+
+			let email = $('#inputEmail').val()
+			let username = $('#inputUsername').val()
+		
+			$.post('/searchusersignup', {username: username, email: email}, (data) => {
+				if(data.email === email) {
+					e.preventDefault()
+					$('#emailInUse').append('This email address is already in use.')
+				} else if (data.username === username) {
+					e.preventDefault()		
+					$('#usernameInUse').append('This username is already in use.')
+				} else if (data.available) {
+					$('#signupform').submit()
+				}
+			})
+		})
+	})
+
+style
+	include ../bootstrap/signin/signin.css
+	include ../public/custom/general.css

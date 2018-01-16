@@ -1,0 +1,11 @@
+Choorz to-do:
+
+Web pages
+- make all web pages
+- make footer stick to bottom (it's halfway the page on login screen) without using position absolute, because than the footer goes over content when the page dynamically expands.
+
+
+Server
+
+
+Database

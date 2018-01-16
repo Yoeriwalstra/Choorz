@@ -1,0 +1,44 @@
+html(lang='en')
+	head
+		title Choorz - New chore
+		script(src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous")
+		link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+		script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js")
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+	body
+		.site-wrapper
+			.site-wrapper-inner
+				include navbar
+				.container
+					form(method="POST" action="/newchore")
+						.form-group.form-signin
+							select.custom-select.form-control(name="category")
+								option(selected='') Choose a chore category
+								option(value='1') Create new category
+									//How to add create category option (with AJAX)?
+									//-input(value="Create new category")
+								option(value='general') General
+								option(value='housekeeping') Housekeeping
+								option(value='hygiene') Hygiene
+						.form-group
+							input.form-control(placeholder="Chore description..." name="description")
+						.form-group
+							.lead
+								| Remind me every:
+							input.form-control(type="number" min="1" step="1" name="intervalInteger" value="" placeholder="1, 2, 3...")
+						.form-group
+							select.custom-select.form-control#timePeriod(name="timePeriod")
+								option(selected="") Time period
+								option(value='day') Day(s)
+								option(value='week') Week(s)
+								option(value='month') Month(s)
+								option(value='year') Year(s)
+						input.btn.btn-lg.btn-secondary#submitbtn(type='submit' value='Add chore')
+			include footer 
+					
+style
+	include ../public/custom/general.css
+	include ../public/custom/newchore.css

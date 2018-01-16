@@ -1,0 +1,58 @@
+html(lang='en')
+	head
+		title Choorz - Log in
+		script(src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous")
+		link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+		script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+		
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+	body
+		.site-wrapper
+			.site-wrapper-inner
+				include navbar
+				.container
+					.form-signin
+						h2.form-signin-heading Fill in all fields to log in
+						p.lead or <a id="login" href="./signup">sign up</a> if you don't have an account
+						.form-group.has-feedback#username
+							input#inputUsername.form-control(type='text', name="username" placeholder='Username', required='', autofocus='')
+							#usernameNotPresent
+						.form-group.has-feedback#password
+							input#inputPassword.form-control(type='password', name="password" placeholder='Password', required='')
+							#usernamePasswordNoMatch
+						//- .checkbox
+						//- 	label
+						//- 		input(type='checkbox', value='remember-me')
+						//- 		|  Remember me
+						input.btn.btn-lg.btn-secondary#submitbtn(type='button' value="Log in")
+			include footer
+
+script.
+	$(document).ready(() => {
+		$('#submitbtn').click((e) => {
+			$('#usernameNotPresent').empty()
+			$('#usernamePasswordNoMatch').empty()
+
+			let username = $('#inputUsername').val()
+			let password = $('#inputPassword').val()
+		
+			$.post('/login', {username: username, password: password}, (data) => {
+			console.log("this is the callback data", data)
+				if(data.error) {
+					e.preventDefault()		
+					$('#usernameNotPresent').append(`<div>${data.error}</div>`)
+				} else if (data.error1) {
+					$('#usernamePasswordNoMatch').append(`<div>${data.error1}</div>`)
+				} else  if (data) {
+					// Use window.location.href to redirect to different page when using an AJAX-request!
+					window.location.href = "/";
+				}
+			})
+		})
+	})
+
+style
+	include ../bootstrap/signin/signin.css
+	include ../public/custom/general.css

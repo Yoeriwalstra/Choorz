@@ -1,0 +1,27 @@
+html(lang='en')
+	head
+		title Choorz - Welcome
+		script(src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous")
+		link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+		script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+	body
+		.site-wrapper
+			.site-wrapper-inner
+				include navbar
+				.cover-container
+					main.inner.cover(role='main')
+						h1.cover-heading Hi there!
+						p.lead
+							| Welcome to Choorz, the easy-to-use app that helps you keep track of all the chores on your to-do-list.
+						p.lead
+							a.btn.btn-lg.btn-secondary(href='./signup') Sign up
+						p.lead
+							| or <a id="login" href='./login'>log in</a>
+			include footer
+
+style
+	include ../public/custom/general.css
+	include ../public/custom/welcome.css

@@ -1,0 +1,14 @@
+nav.navbar.navbar-default
+	.navbar-header
+		if(user)
+			a.navbar-brand(href='./index')
+				img(alt='Brand', src='../public/images/logo.png')
+			
+			style
+				include ../public/custom/navbarsess.css
+		else
+			a.navbar-brand(href='./welcome')
+				img(alt='Brand', src='../public/images/logo.png')
+
+			style
+				include ../public/custom/navbarnosess.css
