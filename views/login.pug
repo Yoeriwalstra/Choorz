@@ -39,11 +39,11 @@ script.
 			let password = $('#inputPassword').val()
 		
 			$.post('/login', {username: username, password: password}, (data) => {
-			console.log("this is the callback data", data)
 				if(data.error) {
 					e.preventDefault()		
 					$('#usernameNotPresent').append(`<div>${data.error}</div>`)
 				} else if (data.error1) {
+					e.preventDefault()
 					$('#usernamePasswordNoMatch').append(`<div>${data.error1}</div>`)
 				} else  if (data) {
 					// Use window.location.href to redirect to different page when using an AJAX-request!

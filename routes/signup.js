@@ -2,7 +2,7 @@ module.exports = (app, db, bcrypt, session) => {
 const Op = db.Sequelize.Op
 
 	app.get('/signup', (req, res) => {
-		res.render('signup')
+		res.render('signup', {user: req.session.user})
 	})
 
 	app.post('/signup', (req, res) => {

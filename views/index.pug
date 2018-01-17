@@ -16,22 +16,40 @@ html(lang='en')
 					#accordion(role='tablist')
 						each item in category
 							.card
-								// Create dynamic ID's for each 'category-and-description-combo'
 								div(id=`heading${item}`, class='card-header' role='tab')
 									h5.mb-0
-										//And here (href & aria-controls)
 										a.btn.btn-secondary#chorebtn(data-toggle='collapse', href=`#collapse${item}`, role='button', aria-expanded='false', aria-controls=`collapse${item}`)
 											| #{item}
-								//And here
 								div(id=`collapse${item}`, class='collapse' role='tabpanel', aria-labelledby=`heading${item}`, data-parent='#accordion')
 									.card-body
-										//Do I need list-group-flush?
 										ul.list-group.list-group-flush
 											each chore in result
 												if chore.dataValues.category === `${item}` 
 													li.list-group-item
-														a(role="button") #{chore.dataValues.description}
+														a(id=`${chore.dataValues.description}`, class="choreDescription" role="button", data-toggle='modal', data-target='#exampleModalCenter') #{chore.dataValues.description}
+														// Modal
+														#exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+															.modal-dialog.modal-dialog-centered(role='document')
+																.modal-content
+																	.modal-header
+																		h5#exampleModalLongTitle.modal-title Modal title
+																		button.close(type='button', data-dismiss='modal', aria-label='Close')
+																			span(aria-hidden='true') ×
+																	.modal-body
+																		| Good job on performing your chore! Your timer has been reset. You will receive an email notification if you haven't performed this chore again in one week.
+																		//- #{intervalInteger} #{timePeriod}
+																	.modal-footer
+																		button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 			include footer
+script.
+	$(document).ready(() => {
+		$('.choreDescription').click(function(e) {
+			let choreDescription = this.id
+				$.post('/countdown', {choreDescription: choreDescription}, (data) => {
+					
+				})
+			})
+		})
 
 style
 	include ../public/custom/general.css

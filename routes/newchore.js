@@ -1,7 +1,7 @@
 module.exports = (app, db) => {
 	app.get('/newchore', (req, res) => {
 		//if (req.session.user) {
-		res.render('newchore')
+		res.render('newchore', {user: req.session.user})
 	})
 
 	app.post('/newchore', (req, res) => {

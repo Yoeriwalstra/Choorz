@@ -1,6 +1,6 @@
 module.exports = (app, db, bcrypt, session) => {
 	app.get('/login', (req, res) => {
-		res.render('login')
+		res.render('login', {user: req.session.user})
 	})
 
 	app.post("/login", (req, res) => {
@@ -23,7 +23,7 @@ module.exports = (app, db, bcrypt, session) => {
 					}
 					else if (compareResult) {
 						req.session.user = {id: result.dataValues.id, username: result.dataValues.username}
-						res.status(200).send({loggedIn: true})
+						res.status(200).send(true)
 					} else {
 						res.send({error1: "The username and password do not match."})
 					}
