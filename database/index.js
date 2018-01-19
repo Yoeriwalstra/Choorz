@@ -73,11 +73,31 @@ const Chore = sequelize.define('chore', {
 		validate: {
 			notEmpty: true,
 		}
-
+	},
+	intervalInMs: {
+		type: Sequelize.BIGINT,
+		allowNull: false,
+		validate: {
+			notEmpty: true,
+		}
+	},
+	createdAtInMs: {
+		type: Sequelize.BIGINT,
+		allowNull: false,
+		validate: {
+			notEmpty: true,
+		}
+	},
+	reminderCounter: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		validate: {
+			notEmpty: true,
+		}
 	}
 });
 
-//These functions function as foreign key constraints for the .create-module
+//These methods function as foreign key constraints for the .create-method
 User.hasMany(Chore)
 Chore.belongsTo(User)
 

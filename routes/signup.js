@@ -1,4 +1,6 @@
-module.exports = (app, db, bcrypt, session) => {
+const bcrypt = require('bcrypt');
+
+module.exports = (app, db) => {
 const Op = db.Sequelize.Op
 
 	app.get('/signup', (req, res) => {
@@ -6,16 +8,14 @@ const Op = db.Sequelize.Op
 	})
 
 	app.post('/signup', (req, res) => {
-		let email = req.body.email
-		let username = req.body.username
 		let password = req.body.password
 		let verifyPw = req.body.verifyPw
 
 		if (password === verifyPw) {
 			bcrypt.hash(password, 10, (err, hash) => {
 				db.User.create({
-					email: email,
-					username: username,
+					email: req.body.email,
+					username: req.body.username,
 					password: hash
 				})
 				.then((result) => {
@@ -28,22 +28,5 @@ const Op = db.Sequelize.Op
 				})
 			})
 		}
-	})
-
-	app.post('/searchusersignup', (req, res) => {
-		let username = req.body.username
-		let email = req.body.email
-
-		db.User.findAll({
-			where: {
-				[Op.or]: [{username: username}, {email: email}]
-			}
-		}).then((result) => {
-			if(result.length === 0) {
-				res.send({available: true})
-			} else {
-				res.send({username: result[0].dataValues.username, email: result[0].dataValues.email})
-			}
-		})
 	})
 }

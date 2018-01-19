@@ -34,9 +34,8 @@ html(lang='en')
 																	.modal-header
 																		h5#exampleModalLongTitle.modal-title Modal title
 																		button.close(type='button', data-dismiss='modal', aria-label='Close')
-																			span(aria-hidden='true') ×
 																	.modal-body
-																		| Good job on performing your chore! Your timer has been reset. You will receive an email notification if you haven't performed this chore again in one week.
+																		| Good job on performing your chore! Your timer has been reset. You will receive an email notification if you haven't performed this chore before the set time interval has passed.
 																		//- #{intervalInteger} #{timePeriod}
 																	.modal-footer
 																		button.btn.btn-secondary(type='button', data-dismiss='modal') Close

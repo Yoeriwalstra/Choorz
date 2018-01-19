@@ -2,7 +2,6 @@
 	top: 0px;
 	margin-bottom: 0px;
 	background-color: rgba(255,255,255,  0);
-	//position: fixed;
 	width: 100%;
 	height: 50px;
 	border: none;
@@ -13,7 +12,6 @@
 }
 
 .navbar-header {
-//    float: left;
     text-align: center;
     width: 100%;
     height: inherit;

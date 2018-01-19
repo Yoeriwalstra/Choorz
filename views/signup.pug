@@ -31,10 +31,6 @@ html(lang='en')
 						.form-group.has-feedback#verifypassword
 							input#inputVerifyPassword.form-control(type='password', name="verifyPw" data-match='#inputPassword', data-match-error="Whoops, these don't match", placeholder='Verify password', required='')
 							span.glyphicon.form-control-feedback
-						//- .checkbox
-						//- 	label
-						//- 		input(type='checkbox', value='remember-me')
-						//- 		|  Remember me
 						input.btn.btn-lg.btn-secondary#submitbtn(type='button' value='Sign up') 
 			include footer
 
@@ -62,5 +58,5 @@ script.
 	})
 
 style
-	include ../bootstrap/signin/signin.css
+	include ../public/custom/signin.css
 	include ../public/custom/general.css

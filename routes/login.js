@@ -1,4 +1,6 @@
-module.exports = (app, db, bcrypt, session) => {
+const bcrypt = require('bcrypt');
+
+module.exports = (app, db) => {
 	app.get('/login', (req, res) => {
 		res.render('login', {user: req.session.user})
 	})

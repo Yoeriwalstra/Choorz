@@ -1,4 +1,4 @@
-module.exports = (app, db, session) => {
+module.exports = (app, db) => {
 	app.get('/', (req, res) => {
 		if (req.session.user) {
 			db.Chore.findAll({
