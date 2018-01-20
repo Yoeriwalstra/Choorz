@@ -43,13 +43,8 @@ html(lang='en')
 script.
 	$(document).ready(() => {
 		$('.choreDescription').click(function(e) {
-			let choreDescription = this.id
-				$.post('/countdown', {choreDescription: choreDescription}, (data) => {
-					
-				})
-			})
-		})
-
+			
+		}
 style
 	include ../public/custom/general.css
 	include ../public/custom/index.css
