@@ -31,7 +31,7 @@ require('./routes/logout.js')(app)
 
 let reminder = require('./routes/reminder.js')
 
-db.sequelize.sync({force: true}).then(() => {
+db.sequelize.sync().then(() => {
 	setInterval(function(){reminder(db, sgMail)}, 1000)
 })
 
